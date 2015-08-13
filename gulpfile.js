@@ -39,6 +39,7 @@ gulp.task('get-libs', ['clean:js'], function(){
     './bower_components/requirejs-plugins/src/**',
     './bower_components/requirejs-text/text.js',
     './bower_components/underscore/underscore-min.js',
+    './bower_components/material-design-lite/material.js'
   ])
   .pipe(uglify())
   .pipe(gulp.dest('./dist/js/components'))
@@ -71,6 +72,7 @@ gulp.task('styles:temp',['clean:styles'], function () {
 gulp.task('styles',['styles:temp'], function () {
   return gulp.src([
       './dist/styles_temp/**.css',
+      './bower_components/material-design-lite/material.css'
     ])
     .pipe(concatCss("main.css"))
     .pipe(minifyCss())
