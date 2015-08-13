@@ -1,1 +1,1 @@
-# vanilla-backbonejs-materialize
+# backbonejs-materialize
