@@ -37,7 +37,6 @@ gulp.task('get-libs', ['clean:js'], function(){
     './bower_components/requirejs-text/text.js',
     './bower_components/underscore/underscore-min.js',
   ])
-  //.pipe(concatjs("components.js"))
   .pipe(uglify())
   .pipe(gulp.dest('./dist/js/components'))
 });
@@ -91,7 +90,6 @@ gulp.task("build", ["styles", "js:build", "html"], function(cb){
   del([ "./dist/styles_temp"],cb);
 });
 //
-
 //dev
 gulp.task('browser-sync', ["build"], function() {
   browserSync({
@@ -105,4 +103,7 @@ gulp.task('browser-sync', ["build"], function() {
   gulp.watch('app/**/*.html', ["html", reload]);
 });
 
-gulp.task('default', ['browser-sync']);
+//
+gulp.task('default', ['clean'], function () {
+    gulp.run('browser-sync');
+})
