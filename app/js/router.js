@@ -14,7 +14,7 @@ define([
       obj.render();
     },
     index: function(){
-      this.render(index);
+      //this.render(index);
     }
   });
   return {
