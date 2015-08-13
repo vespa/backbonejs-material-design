@@ -83,9 +83,15 @@ gulp.task('styles',['styles:temp'], function () {
 gulp.task("html", function(){
     gulp.src([
       "./app/**/**.html",
-      "./app/**/**.hbs"
+      "./app/**/**.hbs",
+      "./app/**/**.png",
+      "./app/**/**.jpg",
+      "./app/**/**.gif",
+      "./app/**/**.svg"
     ]).pipe(gulp.dest('./dist'))
 });
+
+
 
 gulp.task("build", ["styles", "js:build", "html"], function(cb){
   console.log("deleting temporary files...");
