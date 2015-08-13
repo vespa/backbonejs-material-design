@@ -1,4 +1,4 @@
-# backbonejs-materialize
+# backbonejs-material-design
 
 start to dev.
 
