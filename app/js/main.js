@@ -11,11 +11,12 @@
             'jquery'    : bower_path+  'jquery.min',
             'underscore': bower_path+ 'underscore-min',
             'text'      : bower_path+ 'text',
-            'hbs'       : bower_path+ 'hbs'
+            'hbs'       : bower_path+ 'hbs',
+            'material'  : bower_path+ 'material',
         }, 
     });
     require([
-        'jquery',
+        'material',
         'backbone'
         ]);
 })();
