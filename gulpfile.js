@@ -67,6 +67,9 @@ gulp.task('styles:temp',['clean:styles'], function () {
 });
 
 gulp.task('styles',['styles:temp'], function () {
+  gulp .src(["./bower_components/materialize/font/**/**"])
+              .pipe(gulp.dest('./dist/font/'));
+
   return gulp.src([
       './dist/styles_temp/**.css',
     ])
@@ -77,17 +80,17 @@ gulp.task('styles',['styles:temp'], function () {
 
 // move HTMLs
 gulp.task("html", function(){
-    return gulp.src([
+    gulp.src([
       "./app/**/**.html",
       "./app/**/**.hbs"
     ]).pipe(gulp.dest('./dist'))
 });
 
-gulp.task("generate", ["styles", "js:build", "html"], function(cb){
-  console.log("deleting temporary files...")
+gulp.task("build", ["styles", "js:build", "html"], function(cb){
+  console.log("deleting temporary files...");
   del([ "./dist/styles_temp"],cb);
 });
-gulp.task("build", ["generate"]);
+//
 
 //dev
 gulp.task('browser-sync', ["build"], function() {
