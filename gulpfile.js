@@ -34,7 +34,7 @@ gulp.task('get-libs', ['clean:js'], function(){
     './bower_components/requirejs-hbs/hbs.js',
     './bower_components/requirejs-hbs/hbs-builder.js',
     './bower_components/requirejs-plugins/src/**',
-    './bower_components/requirejs-text/src/text.js',
+    './bower_components/requirejs-text/text.js',
     './bower_components/underscore/underscore-min.js',
   ])
   //.pipe(concatjs("components.js"))
