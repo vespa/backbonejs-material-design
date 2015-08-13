@@ -16,7 +16,6 @@
         }, 
     });
     require([
-        'material',
         'backbone'
         ]);
 })();

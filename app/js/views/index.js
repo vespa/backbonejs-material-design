@@ -1,5 +1,5 @@
 define([
-  'hbs!templates/partial/title',
+  'hbs!templates/partial/header',
   'hbs!templates/index'
 ], function(header, contentBody){
   var Content = Backbone.View.extend({
