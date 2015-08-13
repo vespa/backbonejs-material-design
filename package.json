@@ -1,5 +1,5 @@
 {
-  "name": "materialize",
+  "name": "material-backbonejs", 
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,6 +15,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-concat-css": "^2.2.0",
     "gulp-minify-css": "^1.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0"

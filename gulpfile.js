@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
+    rename  = require('gulp-rename'),
     del = require("del"),
     sourcemaps = require('gulp-sourcemaps'),
     minifyCss = require('gulp-minify-css'),
@@ -25,7 +26,9 @@ gulp.task('clean:js', function(cb) {
 
 
 //GET BOWER libs
+
 gulp.task('get-libs', ['clean:js'], function(){
+
   return gulp.src([
     './bower_components/backbone/backbone-min.js',
     './bower_components/handlebars/handlebars.min.js',
@@ -48,6 +51,7 @@ gulp.task('js', function(cb) {
   ])
   .pipe(gulp.dest('./dist/js/'))
 });
+
 gulp.task('js:build', ['get-libs'], function(cb) {
   return gulp.src([
     "./app/js/**/**"
@@ -58,17 +62,13 @@ gulp.task('js:build', ['get-libs'], function(cb) {
 // generate styles
 gulp.task('styles:temp',['clean:styles'], function () {
   return gulp.src([
-      './app/scss/*.scss',
-      './bower_components/materialize/sass/*.scss'
+      './app/scss/*.scss'
     ])
     .pipe(sass())
     .pipe(gulp.dest('./dist/styles_temp/'));
 });
 
 gulp.task('styles',['styles:temp'], function () {
-  gulp .src(["./bower_components/materialize/font/**/**"])
-              .pipe(gulp.dest('./dist/font/'));
-
   return gulp.src([
       './dist/styles_temp/**.css',
     ])
@@ -87,7 +87,9 @@ gulp.task("html", function(){
 
 gulp.task("build", ["styles", "js:build", "html"], function(cb){
   console.log("deleting temporary files...");
-  del([ "./dist/styles_temp"],cb);
+  del([
+     "./dist/styles_temp"
+  ],cb);
 });
 //
 //dev
@@ -99,8 +101,8 @@ gulp.task('browser-sync', ["build"], function() {
   });
   gulp.watch('app/scss/**/*.scss', ["styles",reload]);
   gulp.watch('app/js/**/*.js', ["js", reload]);
-  gulp.watch('app/templates/**/**.hbs',["html", reload]);
-  gulp.watch('app/**/*.html', ["html", reload]);
+  gulp.watch('app/templates/**/**',["html", reload]);
+  gulp.watch('app/**/**.html', ["html", reload]);
 });
 
 //

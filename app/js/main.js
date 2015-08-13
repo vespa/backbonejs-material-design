@@ -12,9 +12,12 @@
             'underscore': bower_path+ 'underscore-min',
             'text'      : bower_path+ 'text',
             'hbs'       : bower_path+ 'hbs'
-        }
+        }, 
     });
-    require(['backbone']);
+    require([
+        'jquery',
+        'backbone'
+        ]);
 })();
 
 require(['app'], function(App){
