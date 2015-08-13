@@ -23,12 +23,14 @@ gulp.task('clean:js', function(cb) {
   del([ "./dist/js"],cb);
 });
 
+
+//GET BOWER libs
 gulp.task('get-libs', ['clean:js'], function(){
   return gulp.src([
     './bower_components/backbone/backbone-min.js',
     './bower_components/handlebars/handlebars.min.js',
     './bower_components/jquery/dist/jquery.min.js',
-    './bower_components/requirejs/requirejs.js',
+    './bower_components/requirejs/require.js',
     './bower_components/requirejs-hbs/hbs.js',
     './bower_components/requirejs-hbs/hbs-builder.js',
     './bower_components/requirejs-plugins/src/**',
@@ -40,28 +42,64 @@ gulp.task('get-libs', ['clean:js'], function(){
   .pipe(gulp.dest('./dist/js/components'))
 });
 
-gulp.task('js', ['get-libs'], function(cb) {
+// GET my own js
+gulp.task('js', function(cb) {
+  return gulp.src([
+    "./app/js/**/**"
+  ])
+  .pipe(gulp.dest('./dist/js/'))
+});
+gulp.task('js:build', ['get-libs'], function(cb) {
   return gulp.src([
     "./app/js/**/**"
   ])
   .pipe(gulp.dest('./dist/js/'))
 });
 
-gulp.task('styles',['clean:styles'], function () {
+// generate styles
+gulp.task('styles:temp',['clean:styles'], function () {
   return gulp.src([
       './app/scss/*.scss',
       './bower_components/materialize/sass/*.scss'
     ])
-      .pipe(sass(
-        {
-        includePaths: [
-        './app/scss/*.scss',
-        './bower_components/materialize/sass/*.scss'
-        ]
-      }
-    ))
+    .pipe(sass())
+    .pipe(gulp.dest('./dist/styles_temp/'));
+});
+
+gulp.task('styles',['styles:temp'], function () {
+  return gulp.src([
+      './dist/styles_temp/**.css',
+    ])
     .pipe(concatCss("main.css"))
     .pipe(minifyCss())
-    .pipe(gulp.dest('./dist/styles/'));
+    .pipe(gulp.dest('./dist/styles/'))
 });
-gulp.task("build", ["styles", "js"])
+
+// move HTMLs
+gulp.task("html", function(){
+    return gulp.src([
+      "./app/**/**.html",
+      "./app/**/**.hbs"
+    ]).pipe(gulp.dest('./dist'))
+});
+
+gulp.task("generate", ["styles", "js:build", "html"], function(cb){
+  console.log("deleting temporary files...")
+  del([ "./dist/styles_temp"],cb);
+});
+gulp.task("build", ["generate"]);
+
+//dev
+gulp.task('browser-sync', ["build"], function() {
+  browserSync({
+    server: {
+      baseDir: ['./dist/'],
+    }
+  });
+  gulp.watch('app/scss/**/*.scss', ["styles",reload]);
+  gulp.watch('app/js/**/*.js', ["js", reload]);
+  gulp.watch('app/templates/**/**.hbs',["html", reload]);
+  gulp.watch('app/**/*.html', ["html", reload]);
+});
+
+gulp.task('default', ['browser-sync']);
