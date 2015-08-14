@@ -2,9 +2,11 @@ define([
   'jquery',
   'backbone',
   'views/index',
+  'hbs!templates/partial/main-header',
   'hbs!templates/partial/menu',
+  'hbs!templates/partial/menu-header',
   'material',
-], function ($, Backbone, index, menu, material) {
+], function ($, Backbone, index, mainHeader, menu,  menuHeader, material) {
 
   var AppRouter = Backbone.Router.extend({
     mainContent: $("#mainContent"),
@@ -22,7 +24,9 @@ define([
       this.render(index);
     },
     initialize: function(){
+      $(".main-header").html(mainHeader()); 
       $(".menu").html(menu());
+      $(".menu-header").html(menuHeader());
     }
   });
   return {
