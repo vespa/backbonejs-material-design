@@ -1,1 +1,11 @@
-//
+.mdl-navigation{
+    .mdl-navigation__link {
+        &:hover{
+            color: #000 !important
+        }
+        i.material-icons{
+            margin: -4px 12px 0 0;
+            float: left;
+        }
+    }
+}
