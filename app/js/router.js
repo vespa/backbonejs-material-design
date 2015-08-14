@@ -4,9 +4,10 @@ define([
   'views/index',
   'hbs!templates/partial/main-header',
   'hbs!templates/partial/menu',
+  'views/partial/menu',
   'hbs!templates/partial/menu-header',
   'material',
-], function ($, Backbone, index, mainHeader, menu,  menuHeader, material) {
+], function ($, Backbone, index, mainHeader, menu,  menuContent, menuHeader, material) {
 
   var AppRouter = Backbone.Router.extend({
     mainContent: $("#mainContent"),
@@ -25,7 +26,7 @@ define([
     },
     initialize: function(){
       $(".main-header").html(mainHeader()); 
-      $(".menu").html(menu());
+      $(".menu").html(menu({content: menuContent() }));
       $(".menu-header").html(menuHeader());
     }
   });

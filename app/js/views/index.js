@@ -1,13 +1,10 @@
 define([
-  'hbs!templates/partial/header',
   'hbs!templates/index'
-], function(header, contentBody){
+], function(contentBody){
   var Content = Backbone.View.extend({
     render: function() {
-      var hd = header({title: "Title"}),
-          body = contentBody(),
-          content = hd+body;
-      this.$el.html(content);
+
+      this.$el.html(contentBody());
       return this;
     }
   });
